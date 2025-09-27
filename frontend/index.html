@@ -45,6 +45,7 @@
       font-size: 1rem;
       color: #000;
       transition: background 0.3s ease;
+      transform: translateX(-120px);
     }
 
     .upload-btn:hover {
@@ -63,7 +64,7 @@
       flex: 1;
       width: 100%;
       display: flex;
-      justify-content: flex-end; /* pushes box to right */
+      justify-content: flex-end;
       align-items: center;
       padding-right: 80px;
     }
@@ -73,6 +74,7 @@
       height: 350px;
       background: white;
       border-radius: 12px;
+      transform: translateX(-50px);
     }
 
     /* Bottom input bar */
@@ -91,6 +93,7 @@
       display: flex;
       align-items: center;
       padding: 5px 10px;
+      transform: translateX(-50px);
     }
 
     .input-bar input {
@@ -152,7 +155,7 @@
 
       // Send to Flask backend
       try {
-        const response = await fetch("http://127.0.0.1:5000/ask", {
+        const response = await fetch("/ask-agent", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ query: message })
