@@ -1,5 +1,6 @@
-import asyncio
+
 import uuid
+from google.genai import types
 from google.adk.agents import LlmAgent
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
@@ -9,6 +10,9 @@ from dotenv import load_dotenv
 import json
 
 load_dotenv()
+
+#class InputSchema(BaseModel):
+    #text: str
 
 class responseContent(BaseModel):
     subject: str = Field(
@@ -34,42 +38,10 @@ root_agent = LlmAgent(
 
         DO NOT include any explanations or additional text outside the JSON response.
     """,
+    #input_schema=InputSchema,
     output_schema=responseContent,
     output_key="response",
     disallow_transfer_to_parent=True,
     disallow_transfer_to_peers=True,
 )
 
-def get_agent_response(prompt: str):
-    session_service = InMemorySessionService()
-    runner = Runner(
-        app_name="CalenPal",
-        agent=root_agent,
-        session_service=session_service
-    )
-
-    user_id = "test_user"           # or generate dynamically
-    session_id = str(uuid.uuid4())   # unique session ID for each request
-    new_message = {"query": prompt}  # matches your agent input schema
-
-    events= runner.run(
-        user_id=user_id,
-        session_id=session_id,
-        new_message=new_message
-    )
-
-
-    final_response_content = None
-    for event in events:
-        if event.is_final_response():
-            # The final response content is typically found in event.content.parts[0].text
-            final_response_content = event.content.parts[0].text
-            break  # Exit the loop once the final response is found
-
-    if final_response_content:
-        print("Agent Response:", final_response_content)
-    else:
-        print("No final response found in the events.")
-        # Extract JSON output
-        print(final_response_content)
-    return final_response_content

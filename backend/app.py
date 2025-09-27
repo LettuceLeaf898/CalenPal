@@ -31,7 +31,7 @@ def ask_agent():
     response_json = get_agent_response(prompt)
     print("Agent response:", response_json)
 
-    return response_json, 201
+    return jsonify(response_json), 201
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
