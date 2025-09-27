@@ -41,6 +41,10 @@ function updateCalendar() {
         const date = new Date(currentYear, currentMonth, i);
         const activeClass =
             date.toDateString() === new Date().toDateString() ? 'active' : '';
+
+        const dateKey =date.toISOString().split('T')[0];
+
+        
         datesHTML += `<div class="date ${activeClass}">${i}</div>`;
     }
 
@@ -86,15 +90,21 @@ fileInput.addEventListener('change', () => {
 // Events
 
 let events = {};
-function addEvent(dateString,tittle,description){
+function addEvent(dateString,title,description, stressLevel){
     if (!events[dateString]){
         events[dateString] = [];
     }
-    events[dateString].push({tittle,description});
+    events[dateString].push({title,description});
     updateCalendar();
     console.log(events);
 }
 
+const btn = document.getElementById('uploadBtnE');
+const dg = document.getElementsByTagName('dialog')[0];
+
+btn.addEventListener('click', (e) => {
+    dg.showModal();
+});
 
 
 // Example usage addEvent('2024-06-15','Meeting','Project discussion at 10 AM');

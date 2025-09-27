@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css";
+    <link rel="stylesheet" href="style.css";>
   
     <meta charset="UTF-8">
   <title>CalenPal</title>
@@ -24,10 +24,18 @@
     </div>
 
     <input type="file" id="fileInput" style="display:none;">
-  <div class="upload-group">
+<div class="upload-group">
     <button id="uploadBtn"  class="upload-btn">Upload Syllabus</button>
-    <button id="uploadBtnE" class="upload-btn">Upload Event</button>
-  </div>
+    <button id="uploadBtnE" class="upload-btn">Upload Event</button> 
+
+    <dialog id="eventDialog">
+        <form method="dialog">
+            <p>This is a popup!</p>
+            <button id="closeDialog">Close</button>
+        </form>
+    </dialog>    
+</div>
+
 </div>
   <hr>
 
@@ -58,6 +66,7 @@
     </div>
 
     <script src="script.js"></script>
+
 
     <!-- Main White Box -->
     <div class="content-box" id="eventsBox">
@@ -100,5 +109,7 @@
       document.getElementById("askInput").value = "";
     });
   </script>
+
+
 </body>
 </html>
