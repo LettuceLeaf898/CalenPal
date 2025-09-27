@@ -62,13 +62,11 @@ nextBtn.addEventListener('click', () => {
     currentDate.setMonth(currentDate.getMonth() + 1);
     updateCalendar();
 });
-
-
-    
-
+ 
 // Initial render
 updateCalendar();
 
+//upload buttons
 
 const uploadBtn = document.getElementById('uploadBtn');
 const fileInput = document.getElementById('fileInput');
@@ -83,3 +81,20 @@ fileInput.addEventListener('change', () => {
         console.log('Selected file:', fileInput.files[0]);
     }
 });
+
+
+// Events
+
+let events = {};
+function addEvent(dateString,tittle,description){
+    if (!events[dateString]){
+        events[dateString] = [];
+    }
+    events[dateString].push({tittle,description});
+    updateCalendar();
+    console.log(events);
+}
+
+
+
+// Example usage addEvent('2024-06-15','Meeting','Project discussion at 10 AM');
