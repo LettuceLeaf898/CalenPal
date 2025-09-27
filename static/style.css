@@ -85,50 +85,67 @@
       right: 100px;
     }
 
-    /* Bottom input bar */
-    .bottom {
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      padding: 0 80px 40px 0;
-    }
+/* Bottom container for both response + input */
+.bottom {
+  width: 100%;
+  display: flex;
+  justify-content: center;   /* center horizontally */
+  align-items: flex-end;     /* align to bottom */
+  gap: 40px;                 /* space between response + input */
+  padding: 0 80px 40px 80px; /* spacing around bottom area */
+  box-sizing: border-box;
+}
 
-    .input-bar {
-      width: 600px;
-      height: 60px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 50px;
-      display: flex;
-      align-items: center;
-      padding: 5px 10px;
-      transform: translateY(-25px);
-    }
+/* Response box (fixed height, scrollable) */
+.response-box {
+  width: 1000px;
+  height: 120px;  /* fixed height */
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 15px;
+  color: white;
+  font-size: 1rem;
+  overflow-y: auto;  /* scroll if text too long */
+  word-wrap: break-word;
+}
 
-    .input-bar input {
-      flex: 1;
-      height: 100%;
-      border: none;
-      outline: none;
-      background: transparent;
-      color: white;
-      font-size: 1rem;
-      padding-left: 15px;
-    }
+/* Input bar (same height, side by side) */
+.input-bar {
+  flex: 1;                       /* take remaining width */
+  height: 120px;                 /* match response box height */
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+}
 
-    .ask-btn {
-      background-color: #fff9a9;
-      border: 2px solid #00221A;
-      border-radius: 50px;
-      padding: 12px 25px;
-      font-weight: bold;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
+.input-bar input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+  font-size: 1rem;
+  padding-left: 15px;
+}
 
-    .ask-btn:hover {
-      background-color: #ffe44c;
-    }
+.ask-btn {
+  background-color: #fff9a9;
+  border: 2px solid #00221A;
+  border-radius: 50px;
+  padding: 12px 25px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.ask-btn:hover {
+  background-color: #ffe44c;
+}
+
 
     @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
     * {
@@ -336,26 +353,6 @@ dialog[open]::backdrop {
   background: rgba(0,0,0,0.5);
 }
 
-.response-container {
-  width: 100%;
-  display: flex;
-  justify-content: left; 
-  padding: 5px 10px; /* same side padding as input bar */
-  box-sizing: border-box;
-}
-
-.response-box {
-  width: 600px;
-  min-height: 80px;
-  max-height: 200px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  padding: 15px;
-  color: white;
-  font-size: 1rem;
-  overflow-y: auto; /* scroll if response is too long */
-  word-wrap: break-word;
-}
 
 
 /* When showModal() is used, the browser automatically
