@@ -139,3 +139,14 @@ eventForm.addEventListener('submit', (e) => {
 
 
 // Example usage addEvent('2024-06-15','Meeting','Project discussion at 10 AM');
+
+const slider = document.getElementById("myRange");
+const output = document.getElementById("sliderValue");
+
+// Set initial value
+output.textContent = slider.value;
+
+// Update while sliding
+slider.addEventListener("input", () => {
+  output.textContent = slider.value;
+});
