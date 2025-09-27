@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>CalenPal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #004d40, #002922);
       color: white;
       height: 100vh;
       width: 100vw;
@@ -37,7 +37,7 @@
 
     .upload-btn {
       background-color: #fff9a9;
-      border: none;
+      border: 4px solid #00221A;
       padding: 15px 35px;
       border-radius: 50px;
       font-weight: bold;
@@ -45,7 +45,7 @@
       font-size: 1rem;
       color: #000;
       transition: background 0.3s ease;
-      transform: translateX(-120px);
+      transform: translateX(-15px);
     }
 
     .upload-btn:hover {
@@ -64,17 +64,36 @@
       flex: 1;
       width: 100%;
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
       align-items: center;
-      padding-right: 80px;
+      gap: 60px; /* space between calendar and white box */
+      padding: 0 80px;
     }
 
+    /* Calendar container */
+    #calendarContainer {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      color: white;
+      width: 1570px;
+      position: absolute;
+      top: 225px;
+      left: 100px;
+    }
+
+    /* White box */
     .content-box {
-      width: 600px;
-      height: 350px;
+      width: 700px;
+      height: 545px;
       background: white;
       border-radius: 12px;
-      transform: translateX(-50px);
+      color: black;
+      padding: 20px;
+      box-sizing: border-box;
+      position: absolute;
+      top: 245px;
+      right: 100px;
     }
 
     /* Bottom input bar */
@@ -93,7 +112,7 @@
       display: flex;
       align-items: center;
       padding: 5px 10px;
-      transform: translateX(-50px);
+      transform: translateY(-25px);
     }
 
     .input-bar input {
@@ -109,7 +128,7 @@
 
     .ask-btn {
       background-color: #fff9a9;
-      border: 2px solid #000;
+      border: 2px solid #00221A;
       border-radius: 50px;
       padding: 12px 25px;
       font-weight: bold;
@@ -134,9 +153,15 @@
   </div>
   <hr>
 
-  <!-- Main White Box -->
+  <!-- Main Layout -->
   <div class="main">
-    <div class="content-box"></div>
+    <!-- Calendar will be loaded here -->
+    <div id="calendarContainer"></div>
+
+    <!-- Main White Box -->
+    <div class="content-box" id="responseBox">
+      <!-- AI responses will show here -->
+    </div>
   </div>
 
   <!-- Bottom Input -->
@@ -148,12 +173,24 @@
   </div>
 
   <script>
+    // Load calendar.html dynamically into #calendarContainer
+    fetch("calendar.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("calendarContainer").innerHTML = data;
+        // after load, also attach the calendar script
+        const script = document.createElement("script");
+        script.src = "script.js";
+        document.body.appendChild(script);
+      })
+      .catch(err => console.error("Error loading calendar:", err));
+
+    // Handle ask form submit
     document.getElementById("askForm").addEventListener("submit", async function(event) {
-      event.preventDefault(); // prevent page reload
+      event.preventDefault();
 
       const message = document.getElementById("askInput").value;
 
-      // Send to Flask backend
       try {
         const response = await fetch("/ask-agent", {
           method: "POST",
@@ -164,13 +201,13 @@
         const data = await response.json();
         console.log("Backend response:", data);
 
-        // Example: put response inside the white box
-        document.querySelector(".content-box").innerText = data.reply || "No response";
+        // Show only latest response
+        document.getElementById("responseBox").innerText = data.reply || "No response";
       } catch (error) {
         console.error("Error:", error);
       }
 
-      document.getElementById("askInput").value = ""; // clear input
+      document.getElementById("askInput").value = "";
     });
   </script>
 </body>
