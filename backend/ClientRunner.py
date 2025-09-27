@@ -1,42 +1,58 @@
 import uuid
-
+import asyncio
 from dotenv import load_dotenv
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
 
-from Client_agent import Client_agent
+from Client_agent.agent import root_agent
+
+load_dotenv()
+def agent_response(prompt: str):
+    session_service_stateful = InMemorySessionService()
+
+    initial_state = {
+        "user_name": "Stressed User",
+        "user_preferences": """
+            I like to have a ordlerly scedule that helps me manage my time.
+            I like to calclate the stress of all events I do
+            I need 8 hours of sleep every night I go to bed around 11PM
+            I hvae a hard time balanceing work and friends
+        """,
+    }
 
 
-session_service = InMemorySessionService()
-runner = Runner(
-    app_name="CalenPal",
-    agent=root_agent,
-    session_service=session_service
-)
+    APP_NAME = "CalenPal"
+    USER_ID = "Stressed Human"
+    SESSION_ID = str(uuid.uuid4())
 
-user_id = "test_user"           # or generate dynamically
-session_id = str(uuid.uuid4())   # unique session ID for each request
-new_message = types.Content(
-    role="users", parts=[types.Part(text=prompt)]
-)  # matches your agent input schema
+    stateful_session = asyncio.run(session_service_stateful.create_session(
+        app_name=APP_NAME,
+        user_id=USER_ID,
+        session_id=SESSION_ID,
+        state=initial_state,
+    ))
 
-events= runner.run(
-    user_id=user_id,
-    session_id=session_id,
-    new_message=new_message
-)
+    runner = Runner(
+        app_name=APP_NAME,
+        agent=root_agent,
+        session_service=session_service_stateful,
+    )
+            # or generate dynamically  # unique session ID for each request
+    new_message = types.Content(
+        role="user", parts=[types.Part(text=prompt)]
+    )  # matches your agent input schema
 
+    for event in runner.run(
+        user_id=USER_ID,
+        session_id=SESSION_ID,
+        new_message=new_message,
+    ):
+        if event.is_final_response():
+            if event.content and event.content.parts:
+                response = event.content.parts[0].text
 
-final_response_content = None
-for event in events:
-    if event.is_final_response():
-         # The final response content is typically found in event.content.parts[0].text
-        final_response_content = event.content.parts[0].text
-        break  # Exit the loop once the final response is found
+    print("==== Session Event Exploration ====")
 
-if final_response_content:
-    print("Agent Response:", final_response_content)
-else:
-    print("No final response found in the events.")
-# Extract JSON output
+    return response
+

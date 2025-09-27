@@ -1,11 +1,11 @@
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
-from Client_agent.agent import get_agent_response
+from ClientRunner import agent_response
 
-app = Flask(__name__, template_folder="../frontend", static_folder="../static")
+app = Flask(__name__, template_folder="../framework", static_folder="../static")
 CORS(app)
 
 items = []
@@ -28,8 +28,7 @@ def ask_agent():
     if not prompt:
         return jsonify({"error": "Missing 'query' in request"}), 400
     print("User prompt:", prompt)
-    response_json = get_agent_response(prompt)
-    print("Agent response:", response_json)
+    response_json = agent_response(prompt)
 
     return jsonify(response_json), 201
 
