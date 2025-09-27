@@ -3,6 +3,10 @@ const datesElement = document.getElementById('dates');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 
+
+
+
+
 let currentDate = new Date();
 
 function updateCalendar() {
@@ -59,5 +63,23 @@ nextBtn.addEventListener('click', () => {
     updateCalendar();
 });
 
+
+    
+
 // Initial render
 updateCalendar();
+
+
+const uploadBtn = document.getElementById('uploadBtn');
+const fileInput = document.getElementById('fileInput');
+
+uploadBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    fileInput.click();
+});
+
+fileInput.addEventListener('change', () => {
+    if (fileInput.files.length > 0) {
+        console.log('Selected file:', fileInput.files[0]);
+    }
+});
