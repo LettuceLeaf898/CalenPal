@@ -55,6 +55,9 @@ function updateCalendar() {
     }
 
     datesElement.innerHTML = datesHTML;
+
+    attachHoverPick();
+    attachDateClick();
 }
 
 prevBtn.addEventListener('click', () => {
@@ -150,3 +153,39 @@ output.textContent = slider.value;
 slider.addEventListener("input", () => {
   output.textContent = slider.value;
 });
+
+function attachHoverPick() {
+  const dateCells = datesElement.querySelectorAll(".date");
+
+  dateCells.forEach(cell => {
+    cell.addEventListener("mouseenter", () => {
+      // Remove previous pick
+      dateCells.forEach(c => c.classList.remove("picked"));
+      // Add pick to the hovered cell
+      cell.classList.add("picked");
+
+      // Optional: store the value if you need it
+      const pickedDay = cell.textContent;
+      console.log("Hovered date:", pickedDay);
+    });
+  });
+}
+
+function attachDateClick() {
+  const dateCells = datesElement.querySelectorAll(".date");
+
+  dateCells.forEach(cell => {
+    cell.addEventListener("click", () => {
+      // Remove previous selection
+      dateCells.forEach(c => c.classList.remove("selected"));
+
+      // Mark the clicked date as selected
+      cell.classList.add("selected");
+
+      // Optional: store the picked date
+      const pickedDay = cell.textContent;
+      console.log("Selected date:", pickedDay);
+    });
+  });
+}
+
