@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  
+    <meta charset="UTF-8">
+  <title>CalenPal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+
+<!-- BODY -->
+
+
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <div class="title">CalenPal</div>
+      <div class="subtitle" style="padding-left:15px;">Schedule your stress</div>
+
+
+    </div>
+
+    <input type="file" id="fileInput" style="display:none;">
+  <div class="upload-group">
+    <button id="uploadBtn"  class="upload-btn">Upload Syllabus</button>
+    <button id="uploadBtnE" class="upload-btn">Upload Event</button>
+  </div>
+</div>
+  <hr>
+
+  <!-- Main Layout -->
+  <div class="main">
+    <!-- Calendar will be loaded here -->
+       
+    <div class="calendar">
+        <div class="header">
+            <button id="prevBtn">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="month-year" id="monthYear"></div>
+            <button id="nextBtn">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="days">
+            <div class="day">Sun</div>
+            <div class="day">Mon</div>
+            <div class="day">Tue</div>
+            <div class="day">Wed</div>
+            <div class="day">Thu</div>
+            <div class="day">Fri</div>
+            <div class="day">Sat</div>
+        </div>
+        <div class="dates" id="dates"></div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <!-- Main White Box -->
+    <div class="content-box" id="eventsBox">
+      
+    </div>
+  </div>
+
+  <!-- Bottom Input -->
+  <div class="bottom">
+    <form id="askForm" class="input-bar">
+      <input type="text" id="askInput" placeholder="Type your message..." required>
+      <button type="submit" class="ask-btn">Ask CalenPal</button>
+    </form>
+  </div>
+
+  <script>
+
+    // Handle ask form submit
+    document.getElementById("askForm").addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const message = document.getElementById("askInput").value;
+
+      try {
+        const response = await fetch("/ask-agent", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query: message })
+        });
+
+        const data = await response.json();
+        console.log("Backend response:", data);
+
+        // Show only latest response
+        document.getElementById("responseBox").innerText = data.reply || "No response";
+      } catch (error) {
+        console.error("Error:", error);
+      }
+
+      document.getElementById("askInput").value = "";
+    });
+  </script>
+</body>
+</html>
