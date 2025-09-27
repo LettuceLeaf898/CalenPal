@@ -99,12 +99,43 @@ function addEvent(dateString,title,description, stressLevel){
     console.log(events);
 }
 
-const btn = document.getElementById('uploadBtnE');
-const dg = document.getElementsByTagName('dialog')[0];
+const uploadEventBtn = document.getElementById('uploadBtnE');
+const eventDialog = document.getElementById('eventDialog');
+const closeDialogBtn = document.getElementById('closeDialog');
+const eventForm = document.getElementById('eventUploadForm');
 
-btn.addEventListener('click', (e) => {
-    dg.showModal();
+// Open dialog when "Upload Event" is clicked
+uploadEventBtn.addEventListener('click', () => {
+    eventDialog.showModal();
 });
+
+// Close dialog when "Close" button is clicked
+closeDialogBtn.addEventListener('click', () => {
+    eventDialog.close();
+});
+
+// Handle form submission
+eventForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const title = document.getElementById('eventTitle').value;
+    const date = document.getElementById('eventDate').value;
+    const desc  = document.getElementById('eventDesc').value;
+
+    if (!title || !date) {
+        alert("Please enter a title and date for the event.");
+        return;
+    }
+
+    // Call your addEvent function from calendar.js
+    addEvent(date, title, desc);
+
+    // Reset form and close dialog
+    eventForm.reset();
+    eventDialog.close();
+    alert("Event added!");
+});
+
 
 
 // Example usage addEvent('2024-06-15','Meeting','Project discussion at 10 AM');

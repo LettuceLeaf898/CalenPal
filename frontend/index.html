@@ -25,16 +25,28 @@
 
     <input type="file" id="fileInput" style="display:none;">
 <div class="upload-group">
-    <button id="uploadBtn"  class="upload-btn">Upload Syllabus</button>
-    <button id="uploadBtnE" class="upload-btn">Upload Event</button> 
+    <button id="uploadBtn" class="upload-btn">Upload Syllabus</button>
+    <button id="uploadBtnE" class="upload-btn">Upload Event</button>
 
+    <!-- Dialog for adding event -->
     <dialog id="eventDialog">
-        <form method="dialog">
-            <p>This is a popup!</p>
-            <button id="closeDialog">Close</button>
+        <h2>Upload Event Details</h2>
+        <form id="eventUploadForm" method="dialog">
+            <label for="eventTitle">Event Title:</label>
+            <input type="text" id="eventTitle" name="eventTitle" required><br><br>
+
+            <label for="eventDate">Event Date:</label>
+            <input type="date" id="eventDate" name="eventDate" required><br><br>
+
+            <label for="eventDesc">Event Description:</label>
+            <textarea id="eventDesc" name="eventDesc" rows="4" cols="50"></textarea><br><br>
+
+            <button type="submit" class="upload-btn">Submit Event</button>
+            <button type="button" id="closeDialog" class="upload-btn">Close</button>
         </form>
-    </dialog>    
+    </dialog>
 </div>
+
 
 </div>
   <hr>
