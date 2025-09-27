@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css";>
+    <link rel="stylesheet" href="..\static\style.css";>
   
     <meta charset="UTF-8">
   <title>CalenPal</title>
@@ -28,7 +28,13 @@
     <button id="uploadBtn" class="upload-btn">Upload Syllabus</button>
     <button id="uploadBtnE" class="upload-btn">Upload Event</button>
 
-    <!-- Dialog for adding event -->
+    
+</div>
+
+
+
+</div>
+<!-- Dialog for adding event -->
     <dialog id="eventDialog">
         <h2>Upload Event Details</h2>
         <form id="eventUploadForm" method="dialog">
@@ -40,15 +46,14 @@
 
             <label for="eventDesc">Event Description:</label>
             <textarea id="eventDesc" name="eventDesc" rows="4" cols="50"></textarea><br><br>
+            
+            <label for="StressLevel">Stress Level:</label>
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
 
             <button type="submit" class="upload-btn">Submit Event</button>
             <button type="button" id="closeDialog" class="upload-btn">Close</button>
         </form>
     </dialog>
-</div>
-
-
-</div>
   <hr>
 
   <!-- Main Layout -->
@@ -77,7 +82,7 @@
         <div class="dates" id="dates"></div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="..\static\script.js"></script>
 
 
     <!-- Main White Box -->

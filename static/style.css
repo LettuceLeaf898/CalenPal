@@ -7,6 +7,7 @@
       overflow: hidden; /* removes scrollbars */
       display: flex;
       flex-direction: column;
+      background: linear-gradient(135deg, #00674F -50%, #00221A , #B8DBD9 200%);
     }
 
     /* Header Section */
@@ -137,13 +138,6 @@
         font-family: "Poppins", sans-serif;
     }
 
-    body {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #00674F -50%, #00221A , #B8DBD9 200%);
-    }
 
     .upload-group {
         display: flex;
@@ -308,17 +302,46 @@
     cursor: pointer;
 }
 
-dialog[open] {
-    border: none;           /* remove default border */
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+#eventDialog {
+  border: none;
+  padding: 20px 30px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  max-width: 400px;
+  width: 80%;
 }
 
-dialog[open]::backdrop {
-    background: rgba (0,0,0,0.5);
+/* Make sure the dialog can use the full viewport */
+dialog#eventDialog {
+  position: fixed;       /* detach from parent flow */
+  top: 50%;              /* vertical center */
+  left: 50%;             /* horizontal center */
+  transform: translate(-50%, -50%); /* true centering */
+  padding: 20px;
+  border: none;
+  border-radius: 10px;
+  background: #fff;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
 }
+
+/* optional: dim background when open */
+dialog#eventDialog::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+
+dialog[open]::backdrop {
+  background: rgba(0,0,0,0.5);
+}
+
+
+
+/* When showModal() is used, the browser automatically
+   centers the <dialog> horizontally & vertically. 
+   No need for position tricks! */
+
 
 
 
