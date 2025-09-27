@@ -99,6 +99,11 @@
     </form>
   </div>
 
+  <!-- Bottom Output -->
+  <div class="response-container">
+    <div id="responseBox" class="response-box"></div>
+  </div>
+
   <script>
 
     // Handle ask form submit
@@ -118,7 +123,7 @@
         console.log("Backend response:", data);
 
         // Show only latest response
-        document.getElementById("responseBox").innerText = data.reply || "No response";
+        document.getElementById("responseBox").innerText = JSON.parse(data).body || "No response";
       } catch (error) {
         console.error("Error:", error);
       }

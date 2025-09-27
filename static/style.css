@@ -4,7 +4,7 @@
       color: white;
       height: 100vh;
       width: 100vw;
-      overflow: hidden; /* removes scrollbars */
+      overflow: auto; /* removes scrollbars */
       display: flex;
       flex-direction: column;
       background: linear-gradient(135deg, #00674F -50%, #00221A , #B8DBD9 200%);
@@ -336,6 +336,26 @@ dialog[open]::backdrop {
   background: rgba(0,0,0,0.5);
 }
 
+.response-container {
+  width: 100%;
+  display: flex;
+  justify-content: left; 
+  padding: 5px 10px; /* same side padding as input bar */
+  box-sizing: border-box;
+}
+
+.response-box {
+  width: 600px;
+  min-height: 80px;
+  max-height: 200px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 15px;
+  color: white;
+  font-size: 1rem;
+  overflow-y: auto; /* scroll if response is too long */
+  word-wrap: break-word;
+}
 
 
 /* When showModal() is used, the browser automatically
