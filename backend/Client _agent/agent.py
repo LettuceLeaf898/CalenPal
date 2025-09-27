@@ -1,4 +1,8 @@
 from google.adk.agents import Agent
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 root_agent = Agent(
     name="greeting_agent",

@@ -1,6 +1,9 @@
 from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
+from Client_agent.agent import root_agent
 
 app = Flask(__name__, template_folder="../frontend")
+CORS(app)
 
 items = []
 
@@ -12,11 +15,12 @@ def home():
 def get_items():
     return jsonify(items)
 
-@app.route("/items", methods=["POST"])
-def add_item():
-    new_item = request.get_json()
-    items.append(new_item)
-    return jsonify({"message": "Item added", "items": items}), 201
+@app.route("/ask-agent", methods=["POST"])
+def ask_agent():
+    data = request.get_json()
+    Fdata = data.get("input")
+    agent_response=my_agent.run(Fdata)
+    return jsonify(agent_response), 201
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
