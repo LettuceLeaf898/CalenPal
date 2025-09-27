@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from Client_agent.agent import get_agent_response
 
-app = Flask(__name__, template_folder="../frontend", static_folder="/static")
+app = Flask(__name__, template_folder="../frontend", static_folder="../static")
 CORS(app)
 
 items = []

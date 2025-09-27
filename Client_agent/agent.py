@@ -52,13 +52,24 @@ def get_agent_response(prompt: str):
     session_id = str(uuid.uuid4())   # unique session ID for each request
     new_message = {"query": prompt}  # matches your agent input schema
 
-    raw_response = runner.run(
+    events= runner.run(
         user_id=user_id,
         session_id=session_id,
         new_message=new_message
     )
 
 
-    # Extract JSON output
-    print(raw_response)
-    return raw_response
+    final_response_content = None
+    for event in events:
+        if event.is_final_response():
+            # The final response content is typically found in event.content.parts[0].text
+            final_response_content = event.content.parts[0].text
+            break  # Exit the loop once the final response is found
+
+    if final_response_content:
+        print("Agent Response:", final_response_content)
+    else:
+        print("No final response found in the events.")
+        # Extract JSON output
+        print(final_response_content)
+    return final_response_content
