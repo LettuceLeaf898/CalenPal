@@ -181,14 +181,16 @@
         const formData = new FormData();
         formData.append('file', file);
 
+        document.getElementById("responseBox").innerText = ">> READING SYLLABUS <<";
         const res = await fetch("/upload-syllabus", {
           method: "POST",
           body: formData
         });
 
-        const data = await res.json();
+        const data = await res;
         console.log("Syllabus processed:", data);
-        alert("Added ${data.added} events from syllabus!");
+        location.reload();
+        document.getElementById("responseBox").innerText = ">> SYLLABUS PROCESSED SUCCESSFULLY <<";
       }
     });
   </script>

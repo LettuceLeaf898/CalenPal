@@ -120,7 +120,7 @@ def upload_syllabus():
         file.save(save_path)
         response = agent_rep(save_path)
         print(response)
-        return response
+        return ">> SYLLABUS PROCESSED SUCCESSFULLY <<"
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
