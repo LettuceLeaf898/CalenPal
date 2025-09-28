@@ -1,7 +1,7 @@
-from google.adk.agents import LlmAgent
+from google.adk.agents import Agent
 from google.adk.tools.agent_tool import AgentTool
 
-PDF_Reader_Agent = LlmAgent(
+PDF_Reader_Agent = Agent(
     name="PDF_Reader_Agent",
     model="gemini-2.0-flash",
     description="Agent that can read and extract information from PDF documents",

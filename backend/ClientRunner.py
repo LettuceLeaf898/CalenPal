@@ -5,7 +5,7 @@ from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
 
-from Organizer_Agent.agent import root_agent
+from Chat_Agent.agent import root_agent
 
 load_dotenv()
 def agent_response(prompt: str):
@@ -56,5 +56,12 @@ def agent_response(prompt: str):
 
     print("==== Session Event Exploration ====")
     print(response)
+    response = response.strip()
+    if response.startswith("```json"):
+        response = response[len("```json"):].strip()
+    if response.startswith("```"):
+        response = response[len("```"):].strip()
+    if response.endswith("```"):
+        response = response[:-3].strip()
     return response
 

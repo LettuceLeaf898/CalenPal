@@ -96,6 +96,7 @@ def ask_agent():
     if not prompt:
         return jsonify({"error": "Missing 'query' in request"}), 400
     response_json = agent_response(prompt)
+    print(response_json)
     return jsonify(response_json), 201
 
 

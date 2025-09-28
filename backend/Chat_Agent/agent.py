@@ -13,7 +13,7 @@ def events_reader() -> dict:
     Reads the JSON file and returns its content as a dictionary.
     """
     file_path = os.path.join(os.path.dirname(__file__), 'config.json')
-    events_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'events.json'))
+    events_path = os.path.join(os.path.dirname(__file__), '..', 'events.json')
     events_path = os.path.abspath(events_path)
     with open(events_path, 'r') as file:
         return json.load(file)
@@ -26,8 +26,8 @@ class responseContent(BaseModel):
         description="Awnser what ever question was aksed about the calander"
     )
 
-Chat_Agent = LlmAgent(
-    name="Chat_Agent",
+root_agent = LlmAgent(
+    name="Client_agent",
     # https://ai.google.dev/gemini-api/docs/models
     model="gemini-2.0-flash",
     description="Calander Assiatant meant to awnser any questions about the calander",
@@ -44,7 +44,7 @@ Chat_Agent = LlmAgent(
     IMPORTANT: Your response MUST be valid JSON matching this structure:
         {
             "subject": "Subject line here",
-            "body": "A calming and not freindly message to user about the calendar question asked try to keep it consise and to the point",
+            "body": "A calming and not freindly message to user about the calendar question asked",
         }
 
     if cant read Json file then out put
