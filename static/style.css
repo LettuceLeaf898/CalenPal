@@ -141,6 +141,7 @@
       padding: 15px;
       color: white;
       font-size: 1rem;
+      font-family: consolas, monospace;
       overflow-y: auto;
       /* scroll if text too long */
       word-wrap: break-word;

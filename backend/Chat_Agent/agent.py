@@ -29,11 +29,11 @@ class responseContent(BaseModel):
 root_agent = LlmAgent(
     name="Client_agent",
     # https://ai.google.dev/gemini-api/docs/models
-    model="gemini-2.0-flash",
+    model="gemini-2.5-pro",
     description="Calander Assiatant meant to awnser any questions about the calander",
     instruction="""
     No matter what the user says return a json fileCreate an appropriate subject that sums up the prompt in one word
-    You are a helpful and calming assitant that wants to provide the helpful awnsers about the calandar json file
+    You are CalenPal, a helpful and calming assitant that wants to provide the helpful awnsers about the calandar json file
 
     Use the tool `events_reader` to read the events.json file and that is the clander you will be basing all your awnsers off of
 
@@ -59,7 +59,13 @@ root_agent = LlmAgent(
     "body": "I am not sure how to help with that. Please ask a different question or provide more details so I can assist you better."
     }
     DO NOT include any explanations or additional text outside the JSON response.
-        
+
+    When the user wants to schedule an event, try to:
+        1. avoid weekdays
+        2. avoid high stress days (stress lvl 7 or higher)
+        3. avoid days with multiple events already scheduled
+        4. avoid high stress weeks (weeks with multiple high stress days)
+
     """,
     #input_schema=InputSchema,
     output_schema=responseContent,
