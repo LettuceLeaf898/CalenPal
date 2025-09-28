@@ -5,7 +5,7 @@ from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
 
-from Client_agent.agent import root_agent
+from Organizer_Agent.agent import root_agent
 
 load_dotenv()
 def agent_response(prompt: str):
