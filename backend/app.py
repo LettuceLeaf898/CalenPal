@@ -9,6 +9,7 @@ from werkzeug.utils import secure_filename
 
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 from ClientRunner import agent_response
+from PDFrunner import agent_rep
 
 app = Flask(__name__, template_folder="../framework", static_folder="../static")
 CORS(app)
@@ -115,8 +116,11 @@ def upload_syllabus():
         uploads_dir = os.path.join(os.path.dirname(__file__), "..", "uploads")
         os.makedirs(uploads_dir, exist_ok=True)
         save_path = os.path.join(uploads_dir, filename)
+        print("Saving file to:", save_path)
         file.save(save_path)
-        return jsonify({"filename": filename, "saved_to": save_path}), 201
+        response = agent_rep(save_path)
+        print(response)
+        return response
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
