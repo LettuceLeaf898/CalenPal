@@ -46,9 +46,11 @@
 
             <label for="eventDesc">Event Description:</label>
             <textarea id="eventDesc" name="eventDesc" rows="4" cols="50"></textarea><br><br>
-            
+            <div class ="slidecontainer">
             <label for="StressLevel">Stress Level:</label>
-            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            <span id="sliderValue">5</span>
+            <input type="range" min="1" max="10" value="50" class="slider" id="myRange">
+            </div>
 
             <button type="submit" class="upload-btn">Submit Event</button>
             <button type="button" id="closeDialog" class="upload-btn">Close</button>
@@ -58,6 +60,7 @@
 
   <!-- Main Layout -->
   <div class="main">
+    
     <!-- Calendar will be loaded here -->
        
     <div class="calendar">
