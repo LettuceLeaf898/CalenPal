@@ -40,7 +40,7 @@
 
   <!-- Dialog for adding event -->
   <dialog id="eventDialog">
-    <h2>Upload Event Details</h2>
+    <h2>Upload Event Details</h2> <br>
     <form id="eventUploadForm" method="dialog">
       <label for="eventTitle">Event Title:</label>
       <input type="text" id="eventTitle" name="eventTitle" required><br><br>
@@ -53,8 +53,10 @@
       <div class="slidecontainer">
         <label for="StressLevel">Stress Level:</label>
         <span id="sliderValue">5</span>
-        <input type="range" min="1" max="10" value="5" class="slider" id="myRange">
+        <input type="range" min="1" max="10" value="5" class="slider" id="myRange"><br><br>
       </div>
+
+
       <style>
         .importance-fieldset {
           padding: 10px 0;
@@ -66,13 +68,13 @@
         }
       </style>
       <fieldset class="importance-fieldset">
-        <legend>Important?</legend>
+        <legend>Importance?</legend>
         <label><input type="radio" name="importance" value="low"> Low</label>
         <label><input type="radio" name="importance" value="medium"> Medium</label>
-        <label><input type="radio" name="importance" value="high"> High</label>
-      </fieldset>
-      <button type="submit" class="upload-btn">Submit Event</button>
-      <button type="button" id="closeDialog" class="upload-btn">Close</button>
+        <label><input type="radio" name="importance" value="high"> High</label> <br><br>
+      </fieldset>      <br>
+      <button type="submit" class="submit-btn">Submit Event</button>
+      <button type="button" id="closeDialog" class="submit-btn">Close</button>
 
     </form>
   </dialog>
