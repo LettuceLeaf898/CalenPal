@@ -1,3 +1,86 @@
 [
-    
+  {
+    "title": "New Year's Day",
+    "date": { "month": 1, "day": 1 },
+    "description": "First day of the year",
+    "stress_level": 1,
+    "recurrence": "annual"
+  },
+  {
+    "title": "Birthday of Martin Luther King, Jr.",
+    "date": { "month": 1, "weekday": 1, "nth": 3 },
+    "description": "Honoring Martin Luther King, Jr.",
+    "stress_level": 1,
+    "recurrence": "annual"
+  },
+  {
+    "title": "Inauguration Day",
+    "date": { "month": 1, "day": 20 },
+    "description": "Presidential inauguration every 4 years",
+    "stress_level": 1,
+    "recurrence": "every_4_years"
+  },
+  {
+    "title": "Washington's Birthday",
+    "date": { "month": 2, "weekday": 1, "nth": 3 },
+    "description": "Also known as Presidents Day",
+    "stress_level": 1,
+    "recurrence": "annual"
+  },
+  {
+    "title": "Memorial Day",
+    "date": { "month": 5, "weekday": 1, "nth": -1 },
+    "description": "Honoring military personnel who died in service",
+    "stress_level": 1,
+    "recurrence": "annual"
+  },
+  {
+    "title": "Juneteenth National Independence Day",
+    "date": { "month": 6, "day": 19 },
+    "description": "Celebration of the end of slavery",
+    "stress_level": 1,
+    "recurrence": "annual"
+  },
+  {
+    "title": "Independence Day",
+    "date": { "month": 7, "day": 4 },
+    "description": "Celebrates US independence",
+    "stress_level": 1,
+    "recurrence": "annual"
+  },
+  {
+    "title": "Labor Day",
+    "date": { "month": 9, "weekday": 1, "nth": 1 },
+    "description": "Honoring workers and labor movement",
+    "stress_level": 1,
+    "recurrence": "annual"
+  },
+  {
+    "title": "Columbus Day",
+    "date": { "month": 10, "weekday": 1, "nth": 2 },
+    "description": "Commemorates Christopher Columbus's landing",
+    "stress_level": 1,
+    "recurrence": "annual"
+  },
+  {
+    "title": "Veterans Day",
+    "date": { "month": 11, "day": 11 },
+    "description": "Honoring military veterans",
+    "stress_level": 1,
+    "recurrence": "annual"
+  },
+  {
+    "title": "Thanksgiving Day",
+    "date": { "month": 11, "weekday": 4, "nth": 4 },
+    "description": "Day of giving thanks",
+    "stress_level": 1,
+    "recurrence": "annual"
+  },
+  {
+    "title": "Christmas Day",
+    "date": { "month": 12, "day": 25 },
+    "description": "Celebration of Christmas",
+    "stress_level": 1,
+    "recurrence": "annual"
+  }
 ]

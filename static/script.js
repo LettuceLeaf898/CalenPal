@@ -145,7 +145,7 @@ eventForm.addEventListener('submit', (e) => {
 
 
 // Example usage addEvent('2024-06-15','Meeting','Project discussion at 10 AM');
-  
+
 // Set initial value
 output.textContent = slider.value;
 
@@ -188,7 +188,7 @@ function attachDateClick() {
                 currentDate.getMonth(),
                 day
             );
-            
+
 
             const formattedDate = selectedDate.toLocaleDateString("en-US", {
                 month: "long",
@@ -201,16 +201,16 @@ function attachDateClick() {
 
             // Look up events for this date (if any)
             const eventList = events[key] || [];
-            let contentHTML = `<h3>${formattedDate}</h3>`;
+
             // Build the display HTML
             const box = document.getElementById("eventsBox");
             if (eventList.length === 0) {
-                contentHTML += `<p>No events for this day.</p>`;
+                box.innerHTML = `<h3>${formattedDate}</h3><p>No events for this day.</p>`;
             } else {
                 const listHTML = eventList
-                    .map(ev => `<li><strong>${ev.title}</strong>: ${ev.description}</li>`)
+                    .map(ev => `<li><strong>${ev.title}</strong>: ${ev.description}${ev.description} (Stress: ${ev.stressLevel})</li>`)
                     .join("");
-                contentHTML += `<ul>${listHTML}</ul>`;
+                box.innerHTML = `<h3>${formattedDate}</h3><ul>${listHTML}</ul>`;
             }
             box.innerHTML = contentHTML;
         });

@@ -431,6 +431,6 @@
     }
 
     .date.has-event {
-    border: 2px solid #B8DBD9;
-    font-weight: bold;
-}
+      border: 2px solid #B8DBD9;
+      font-weight: bold;
+    }
