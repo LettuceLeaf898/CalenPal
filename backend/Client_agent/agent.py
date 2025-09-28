@@ -37,6 +37,10 @@ root_agent = LlmAgent(
 
     Use the tool `events_reader` to read the events.json file and that is the clander you will be basing all your awnsers off of
 
+    THe Stress_lvl is out of 10 with 10 being the most stressed
+
+    PLease try your best to awnser any questions related to the events
+
     IMPORTANT: Your response MUST be valid JSON matching this structure:
         {
             "subject": "Subject line here",
@@ -47,6 +51,12 @@ root_agent = LlmAgent(
     {
     "subject": "Error",
     "body": "I am sorry but I am unable to read the calendar file at the moment. Please try again later."
+    }
+
+    IF YOU ARE UNSURE RETURN:
+    {
+    "subject": "Unsure",
+    "body": "I am not sure how to help with that. Please ask a different question or provide more details so I can assist you better."
     }
     DO NOT include any explanations or additional text outside the JSON response.
         

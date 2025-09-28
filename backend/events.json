@@ -1,85 +1,109 @@
 [
   {
-    "title": "New Year's Day",
+    "title": "New Year's Day Party",
     "date": { "month": 1, "day": 1 },
+    "time": "All day",
     "description": "First day of the year",
+    "importance": "medium",
     "stress_level": 1,
     "recurrence": "annual"
   },
   {
-    "title": "Birthday of Martin Luther King, Jr.",
+    "title": "Birthday of Martin Luther King, Jr. Party",
     "date": { "month": 1, "weekday": 1, "nth": 3 },
+    "time": "All day",
     "description": "Honoring Martin Luther King, Jr.",
+    "importance": "low",
     "stress_level": 1,
     "recurrence": "annual"
   },
   {
-    "title": "Inauguration Day",
+    "title": "Inauguration Day Party",
     "date": { "month": 1, "day": 20 },
+    "time": "All day",
     "description": "Presidential inauguration every 4 years",
+    "importance": "low",
     "stress_level": 1,
     "recurrence": "every_4_years"
   },
   {
-    "title": "Washington's Birthday",
+    "title": "Washington's Birthday Party",
     "date": { "month": 2, "weekday": 1, "nth": 3 },
+    "time": "All day",
     "description": "Also known as Presidents Day",
+    "importance": "low",
     "stress_level": 1,
     "recurrence": "annual"
   },
   {
-    "title": "Memorial Day",
+    "title": "Memorial Day Party",
     "date": { "month": 5, "weekday": 1, "nth": -1 },
+    "time": "All day",
     "description": "Honoring military personnel who died in service",
+    "importance": "low",
     "stress_level": 1,
     "recurrence": "annual"
   },
   {
-    "title": "Juneteenth National Independence Day",
+    "title": "Juneteenth National Independence Day Party",
     "date": { "month": 6, "day": 19 },
+    "time": "All day",
     "description": "Celebration of the end of slavery",
+    "importance": "low",
     "stress_level": 1,
     "recurrence": "annual"
   },
   {
-    "title": "Independence Day",
+    "title": "Independence Day Party",
     "date": { "month": 7, "day": 4 },
+    "time": "All day",
     "description": "Celebrates US independence",
+    "importance": "medium",
     "stress_level": 1,
     "recurrence": "annual"
   },
   {
-    "title": "Labor Day",
+    "title": "Labor Day Party",
     "date": { "month": 9, "weekday": 1, "nth": 1 },
+    "time": "All day",
     "description": "Honoring workers and labor movement",
+    "importance": "low",
     "stress_level": 1,
     "recurrence": "annual"
   },
   {
-    "title": "Columbus Day",
+    "title": "Columbus Day Party",
     "date": { "month": 10, "weekday": 1, "nth": 2 },
+    "time": "All day",
     "description": "Commemorates Christopher Columbus's landing",
+    "importance": "low", 
     "stress_level": 1,
     "recurrence": "annual"
   },
   {
-    "title": "Veterans Day",
+    "title": "Veterans Day Party",
     "date": { "month": 11, "day": 11 },
+    "time": "All day",
     "description": "Honoring military veterans",
+    "importance": "low",
     "stress_level": 1,
     "recurrence": "annual"
   },
   {
-    "title": "Thanksgiving Day",
+    "title": "Thanksgiving Day Party",
     "date": { "month": 11, "weekday": 4, "nth": 4 },
+    "time": "All day",
     "description": "Day of giving thanks",
+    "importance": "high",
     "stress_level": 1,
     "recurrence": "annual"
   },
   {
-    "title": "Christmas Day",
+    "title": "Christmas Day Party",
     "date": { "month": 12, "day": 25 },
+    "time": "All day",
     "description": "Celebration of Christmas",
+    "importance": "high",
     "stress_level": 1,
     "recurrence": "annual"
   }
