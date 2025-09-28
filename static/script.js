@@ -42,9 +42,9 @@ function updateCalendar() {
         const activeClass =
             date.toDateString() === new Date().toDateString() ? 'active' : '';
 
-        const dateKey =date.toISOString().split('T')[0];
+        const dateKey = date.toISOString().split('T')[0];
 
-        
+
         datesHTML += `<div class="date ${activeClass}">${i}</div>`;
     }
 
@@ -56,7 +56,7 @@ function updateCalendar() {
 
     datesElement.innerHTML = datesHTML;
 
-    attachHoverPick();
+    //attachHoverPick();
     attachDateClick();
 }
 
@@ -69,7 +69,7 @@ nextBtn.addEventListener('click', () => {
     currentDate.setMonth(currentDate.getMonth() + 1);
     updateCalendar();
 });
- 
+
 // Initial render
 updateCalendar();
 
@@ -93,19 +93,22 @@ fileInput.addEventListener('change', () => {
 // Events
 
 let events = {};
-function addEvent(dateString,title,description, stressLevel){
-    if (!events[dateString]){
+function addEvent(dateString, title, description, stressLevel) {
+    if (!events[dateString]) {
         events[dateString] = [];
     }
-    events[dateString].push({title,description});
+    events[dateString].push({ title, description, stressLevel });
     updateCalendar();
     console.log(events);
 }
+
 
 const uploadEventBtn = document.getElementById('uploadBtnE');
 const eventDialog = document.getElementById('eventDialog');
 const closeDialogBtn = document.getElementById('closeDialog');
 const eventForm = document.getElementById('eventUploadForm');
+const slider = document.getElementById("myRange");
+const output = document.getElementById("sliderValue");
 
 // Open dialog when "Upload Event" is clicked
 uploadEventBtn.addEventListener('click', () => {
@@ -123,7 +126,7 @@ eventForm.addEventListener('submit', (e) => {
 
     const title = document.getElementById('eventTitle').value;
     const date = document.getElementById('eventDate').value;
-    const desc  = document.getElementById('eventDesc').value;
+    const desc = document.getElementById('eventDesc').value;
 
     if (!title || !date) {
         alert("Please enter a title and date for the event.");
@@ -142,50 +145,76 @@ eventForm.addEventListener('submit', (e) => {
 
 
 // Example usage addEvent('2024-06-15','Meeting','Project discussion at 10 AM');
-
-const slider = document.getElementById("myRange");
-const output = document.getElementById("sliderValue");
-
+  
 // Set initial value
 output.textContent = slider.value;
 
 // Update while sliding
 slider.addEventListener("input", () => {
-  output.textContent = slider.value;
+    output.textContent = slider.value;
 });
 
 function attachHoverPick() {
-  const dateCells = datesElement.querySelectorAll(".date");
+    const dateCells = datesElement.querySelectorAll(".date");
 
-  dateCells.forEach(cell => {
-    cell.addEventListener("mouseenter", () => {
-      // Remove previous pick
-      dateCells.forEach(c => c.classList.remove("picked"));
-      // Add pick to the hovered cell
-      cell.classList.add("picked");
+    dateCells.forEach(cell => {
+        cell.addEventListener("mouseenter", () => {
+            // Remove previous pick
+            dateCells.forEach(c => c.classList.remove("picked"));
+            // Add pick to the hovered cell
+            cell.classList.add("picked");
 
-      // Optional: store the value if you need it
-      const pickedDay = cell.textContent;
-      console.log("Hovered date:", pickedDay);
+            // Optional: store the value if you need it
+            const pickedDay = cell.textContent;
+            console.log("Hovered date:", pickedDay);
+        });
     });
-  });
 }
 
 function attachDateClick() {
-  const dateCells = datesElement.querySelectorAll(".date");
+    const dateCells = datesElement.querySelectorAll(".date");
 
-  dateCells.forEach(cell => {
-    cell.addEventListener("click", () => {
-      // Remove previous selection
-      dateCells.forEach(c => c.classList.remove("selected"));
+    dateCells.forEach(cell => {
+        cell.addEventListener("click", () => {
+            // Remove previous selection
+            dateCells.forEach(c => c.classList.remove("selected"));
+            cell.classList.add("selected");
 
-      // Mark the clicked date as selected
-      cell.classList.add("selected");
+            // Figure out which date this is
+            const day = cell.textContent;
 
-      // Optional: store the picked date
-      const pickedDay = cell.textContent;
-      console.log("Selected date:", pickedDay);
+            const selectedDate = new Date(
+                currentDate.getFullYear(),
+                currentDate.getMonth(),
+                day
+            );
+            
+
+            const formattedDate = selectedDate.toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric"
+            });
+            //box.innerHTML = `<h3>${formattedDate}</h3>`;
+            const key = selectedDate.toISOString().split("T")[0]; // keep for event lookup
+
+
+            // Look up events for this date (if any)
+            const eventList = events[key] || [];
+            let contentHTML = `<h3>${formattedDate}</h3>`;
+            // Build the display HTML
+            const box = document.getElementById("eventsBox");
+            if (eventList.length === 0) {
+                contentHTML += `<p>No events for this day.</p>`;
+            } else {
+                const listHTML = eventList
+                    .map(ev => `<li><strong>${ev.title}</strong>: ${ev.description}</li>`)
+                    .join("");
+                contentHTML += `<ul>${listHTML}</ul>`;
+            }
+            box.innerHTML = contentHTML;
+        });
     });
-  });
 }
+
 

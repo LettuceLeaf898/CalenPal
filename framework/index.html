@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="..\static\style.css";>
-  
-    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="..\static\style.css" ;>
+
+  <meta charset="UTF-8">
   <title>CalenPal</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -24,65 +25,65 @@
     </div>
 
     <input type="file" id="fileInput" style="display:none;">
-<div class="upload-group">
-    <button id="uploadBtn" class="upload-btn">Upload Syllabus</button>
-    <button id="uploadBtnE" class="upload-btn">Upload Event</button>
-
-    
-</div>
+    <div class="upload-group">
+      <button id="uploadBtn" class="upload-btn">Upload Syllabus</button>
+      <button id="uploadBtnE" class="upload-btn">Upload Event</button>
 
 
+    </div>
 
-</div>
-<!-- Dialog for adding event -->
-    <dialog id="eventDialog">
-        <h2>Upload Event Details</h2>
-        <form id="eventUploadForm" method="dialog">
-            <label for="eventTitle">Event Title:</label>
-            <input type="text" id="eventTitle" name="eventTitle" required><br><br>
 
-            <label for="eventDate">Event Date:</label>
-            <input type="date" id="eventDate" name="eventDate" required><br><br>
 
-            <label for="eventDesc">Event Description:</label>
-            <textarea id="eventDesc" name="eventDesc" rows="4" cols="50"></textarea><br><br>
-            <div class ="slidecontainer">
-            <label for="StressLevel">Stress Level:</label>
-            <span id="sliderValue">5</span>
-            <input type="range" min="1" max="10" value="50" class="slider" id="myRange">
-            </div>
+  </div>
+  <!-- Dialog for adding event -->
+  <dialog id="eventDialog">
+    <h2>Upload Event Details</h2>
+    <form id="eventUploadForm" method="dialog">
+      <label for="eventTitle">Event Title:</label>
+      <input type="text" id="eventTitle" name="eventTitle" required><br><br>
 
-            <button type="submit" class="upload-btn">Submit Event</button>
-            <button type="button" id="closeDialog" class="upload-btn">Close</button>
-        </form>
-    </dialog>
+      <label for="eventDate">Event Date:</label>
+      <input type="date" id="eventDate" name="eventDate" required><br><br>
+
+      <label for="eventDesc">Event Description:</label>
+      <textarea id="eventDesc" name="eventDesc" rows="4" cols="50"></textarea><br><br>
+      <div class="slidecontainer">
+        <label for="StressLevel">Stress Level:</label>
+        <span id="sliderValue">5</span>
+        <input type="range" min="1" max="10" value="5" class="slider" id="myRange">
+      </div>
+
+      <button type="submit" class="upload-btn">Submit Event</button>
+      <button type="button" id="closeDialog" class="upload-btn">Close</button>
+    </form>
+  </dialog>
   <hr>
 
   <!-- Main Layout -->
   <div class="main">
-    
+
     <!-- Calendar will be loaded here -->
-       
+
     <div class="calendar">
-        <div class="header">
-            <button id="prevBtn">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <div class="month-year" id="monthYear"></div>
-            <button id="nextBtn">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-        </div>
-        <div class="days">
-            <div class="day">Sun</div>
-            <div class="day">Mon</div>
-            <div class="day">Tue</div>
-            <div class="day">Wed</div>
-            <div class="day">Thu</div>
-            <div class="day">Fri</div>
-            <div class="day">Sat</div>
-        </div>
-        <div class="dates" id="dates"></div>
+      <div class="header">
+        <button id="prevBtn">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <div class="month-year" id="monthYear"></div>
+        <button id="nextBtn">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+      <div class="days">
+        <div class="day">Sun</div>
+        <div class="day">Mon</div>
+        <div class="day">Tue</div>
+        <div class="day">Wed</div>
+        <div class="day">Thu</div>
+        <div class="day">Fri</div>
+        <div class="day">Sat</div>
+      </div>
+      <div class="dates" id="dates"></div>
     </div>
 
     <script src="..\static\script.js"></script>
@@ -90,27 +91,27 @@
 
     <!-- Main White Box -->
     <div class="content-box" id="eventsBox">
-      
+
     </div>
   </div>
 
-<!-- Bottom -->
-<div class="bottom">
-  <!-- Output box (fixed height, scrollable) -->
-  <div id="responseBox" class="response-box"></div>
+  <!-- Bottom -->
+  <div class="bottom">
+    <!-- Output box (fixed height, scrollable) -->
+    <div id="responseBox" class="response-box"></div>
 
-  <!-- Input bar -->
-  <form id="askForm" class="input-bar">
-    <input type="text" id="askInput" placeholder="Type your message..." required>
-    <button type="submit" class="ask-btn">Ask CalenPal</button>
-  </form>
-</div>
+    <!-- Input bar -->
+    <form id="askForm" class="input-bar">
+      <input type="text" id="askInput" placeholder="Type your message..." required>
+      <button type="submit" class="ask-btn">Ask CalenPal</button>
+    </form>
+  </div>
 
 
   <script>
 
     // Handle ask form submit
-    document.getElementById("askForm").addEventListener("submit", async function(event) {
+    document.getElementById("askForm").addEventListener("submit", async function (event) {
       event.preventDefault();
 
       const message = document.getElementById("askInput").value;
@@ -137,4 +138,5 @@
 
 
 </body>
+
 </html>
