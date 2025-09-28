@@ -84,7 +84,7 @@ async function loadEvents() {
     }
 }
 
-async function addEvent(dateString, title, description, stressLevel) {
+async function addEvent(dateString, time, title, description, stressLevel) {
     const newEvent = {
         date: dateString,
         time: "00:00", // default if no time picker yet
@@ -187,6 +187,7 @@ eventForm.addEventListener('submit', (e) => {
 
     const title = document.getElementById('eventTitle').value;
     const date = document.getElementById('eventDate').value;
+    const time = document.getElementById('appt-time').value || "00:00";
     const desc = document.getElementById('eventDesc').value;
     const stressLevel = slider.value;
 
@@ -195,7 +196,7 @@ eventForm.addEventListener('submit', (e) => {
         return;
     }
 
-    addEvent(date, title, desc, stressLevel);
+    addEvent(date, time, title, desc, stressLevel);
 
     eventForm.reset();
     eventDialog.close();
@@ -210,22 +211,3 @@ slider.addEventListener("input", () => {
 
 // ---------- Initialize ----------
 loadEvents();
-
-
-
-
-const listHTML = eventList
-    .map(ev => {
-        const stressClass = ev.stress > 8 ? "high-stress" : "";
-        return `<li class="${stressClass}">
-                  <strong>${ev.title}</strong>: ${ev.description} (Stress: ${ev.stress})
-                </li>`;
-    })
-    .join("");
-
-box.innerHTML = `
-  <div class="event-box">
-    <h3 class="event-title">${formattedDate}</h3>
-    <ul class="event-list">${listHTML}</ul>
-  </div>
-`;
