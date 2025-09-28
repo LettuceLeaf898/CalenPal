@@ -3,23 +3,19 @@ const datesElement = document.getElementById('dates');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 
-
-
-
-
 let currentDate = new Date();
+let events = {}; // grouped by date string (YYYY-MM-DD)
 
+// ---------- Calendar Rendering ----------
 function updateCalendar() {
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
 
-    // first day of current month
     const firstDay = new Date(currentYear, currentMonth, 1);
-    // last day of current month
     const lastDay = new Date(currentYear, currentMonth + 1, 0);
 
     const totalDays = lastDay.getDate();
-    const firstDayIndex = firstDay.getDay(); // 0=Sun ... 6=Sat
+    const firstDayIndex = firstDay.getDay();
     const lastDayIndex = lastDay.getDay();
 
     const monthYearString = currentDate.toLocaleDateString('default', {
@@ -30,7 +26,7 @@ function updateCalendar() {
 
     let datesHTML = '';
 
-    // Days from previous month to fill first row
+    // Previous month padding
     for (let i = firstDayIndex - 1; i >= 0; i--) {
         const prevDate = new Date(currentYear, currentMonth, -i);
         datesHTML += `<div class="date inactive">${prevDate.getDate()}</div>`;
@@ -41,9 +37,6 @@ function updateCalendar() {
         const date = new Date(currentYear, currentMonth, i);
         const activeClass =
             date.toDateString() === new Date().toDateString() ? 'active' : '';
-
-        const dateKey = date.toISOString().split('T')[0];
-
 
         datesHTML += `<div class="date ${activeClass}">${i}</div>`;
     }
@@ -56,10 +49,10 @@ function updateCalendar() {
 
     datesElement.innerHTML = datesHTML;
 
-    //attachHoverPick();
     attachDateClick();
 }
 
+// ---------- Month Navigation ----------
 prevBtn.addEventListener('click', () => {
     currentDate.setMonth(currentDate.getMonth() - 1);
     updateCalendar();
@@ -70,93 +63,56 @@ nextBtn.addEventListener('click', () => {
     updateCalendar();
 });
 
-// Initial render
-updateCalendar();
+// ---------- Event Handling ----------
+async function loadEvents() {
+    try {
+        const res = await fetch("/events");
+        const rawEvents = await res.json();
 
-//upload buttons
+        // normalize into {date: [events]}
+        events = {};
+        rawEvents.forEach(ev => {
+            const key = ev.date;
+            if (!events[key]) events[key] = [];
+            events[key].push(ev);
+        });
 
+        console.log("Loaded events:", events);
+        updateCalendar();
+    } catch (err) {
+        console.error("Error loading events:", err);
+    }
+}
 
+async function addEvent(dateString, title, description, stressLevel) {
+    const newEvent = {
+        date: dateString,
+        time: "00:00", // default if no time picker yet
+        title,
+        description,
+        stress: stressLevel
+    };
 
-
-// Events
-
-let events = {};
-function addEvent(dateString, title, description, stressLevel) {
+    // local update
     if (!events[dateString]) {
         events[dateString] = [];
     }
-    events[dateString].push({ title, description, stressLevel });
-    updateCalendar();
-    console.log(events);
-}
+    events[dateString].push(newEvent);
 
-
-const uploadEventBtn = document.getElementById('uploadBtnE');
-const eventDialog = document.getElementById('eventDialog');
-const closeDialogBtn = document.getElementById('closeDialog');
-const eventForm = document.getElementById('eventUploadForm');
-const slider = document.getElementById("myRange");
-const output = document.getElementById("sliderValue");
-
-// Open dialog when "Upload Event" is clicked
-uploadEventBtn.addEventListener('click', () => {
-    eventDialog.showModal();
-});
-
-// Close dialog when "Close" button is clicked
-closeDialogBtn.addEventListener('click', () => {
-    eventDialog.close();
-});
-
-// Handle form submission
-eventForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const title = document.getElementById('eventTitle').value;
-    const date = document.getElementById('eventDate').value;
-    const desc = document.getElementById('eventDesc').value;
-
-    if (!title || !date) {
-        alert("Please enter a title and date for the event.");
-        return;
+    // send to backend
+    try {
+        const res = await fetch("/events", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newEvent)
+        });
+        const saved = await res.json();
+        console.log("Saved event:", saved);
+    } catch (err) {
+        console.error("Error saving event:", err);
     }
 
-    // Call your addEvent function from calendar.js
-    addEvent(date, title, desc);
-
-    // Reset form and close dialog
-    eventForm.reset();
-    eventDialog.close();
-    alert("Event added!");
-});
-
-
-
-// Example usage addEvent('2024-06-15','Meeting','Project discussion at 10 AM');
-
-// Set initial value
-output.textContent = slider.value;
-
-// Update while sliding
-slider.addEventListener("input", () => {
-    output.textContent = slider.value;
-});
-
-function attachHoverPick() {
-    const dateCells = datesElement.querySelectorAll(".date");
-
-    dateCells.forEach(cell => {
-        cell.addEventListener("mouseenter", () => {
-            // Remove previous pick
-            dateCells.forEach(c => c.classList.remove("picked"));
-            // Add pick to the hovered cell
-            cell.classList.add("picked");
-
-            // Optional: store the value if you need it
-            const pickedDay = cell.textContent;
-            console.log("Hovered date:", pickedDay);
-        });
-    });
+    updateCalendar();
 }
 
 function attachDateClick() {
@@ -164,45 +120,87 @@ function attachDateClick() {
 
     dateCells.forEach(cell => {
         cell.addEventListener("click", () => {
-            // Remove previous selection
             dateCells.forEach(c => c.classList.remove("selected"));
             cell.classList.add("selected");
 
-            // Figure out which date this is
             const day = cell.textContent;
-
             const selectedDate = new Date(
                 currentDate.getFullYear(),
                 currentDate.getMonth(),
                 day
             );
-
+            const key = selectedDate.toISOString().split("T")[0];
 
             const formattedDate = selectedDate.toLocaleDateString("en-US", {
                 month: "long",
                 day: "numeric",
                 year: "numeric"
             });
-            //box.innerHTML = `<h3>${formattedDate}</h3>`;
-            const key = selectedDate.toISOString().split("T")[0]; // keep for event lookup
 
-
-            // Look up events for this date (if any)
             const eventList = events[key] || [];
-
-            // Build the display HTML
             const box = document.getElementById("eventsBox");
+
             if (eventList.length === 0) {
                 box.innerHTML = `<h3>${formattedDate}</h3><p>No events for this day.</p>`;
             } else {
                 const listHTML = eventList
-                    .map(ev => `<li><strong>${ev.title}</strong>: ${ev.description}${ev.description} (Stress: ${ev.stressLevel})</li>`)
+                    .map(ev => `<li><strong>${ev.title}</strong>: ${ev.description} (Stress: ${ev.stress})</li>`)
                     .join("");
                 box.innerHTML = `<h3>${formattedDate}</h3><ul>${listHTML}</ul>`;
             }
-            box.innerHTML = contentHTML;
         });
     });
 }
+
+// ---------- Upload Event Dialog ----------
+const uploadEventBtn = document.getElementById('uploadBtnE');
+const eventDialog = document.getElementById('eventDialog');
+const closeDialogBtn = document.getElementById('closeDialog');
+const eventForm = document.getElementById('eventUploadForm');
+const slider = document.getElementById("myRange");
+const output = document.getElementById("sliderValue");
+
+// Open dialog
+uploadEventBtn.addEventListener('click', () => {
+    eventDialog.showModal();
+});
+
+// Close dialog
+closeDialogBtn.addEventListener('click', () => {
+    eventDialog.close();
+});
+
+// Form submit
+eventForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const title = document.getElementById('eventTitle').value;
+    const date = document.getElementById('eventDate').value;
+    const desc = document.getElementById('eventDesc').value;
+    const stressLevel = slider.value;
+
+    if (!title || !date) {
+        alert("Please enter a title and date for the event.");
+        return;
+    }
+
+    addEvent(date, title, desc, stressLevel);
+
+    eventForm.reset();
+    eventDialog.close();
+    alert("Event added!");
+});
+
+// Stress slider
+output.textContent = slider.value;
+slider.addEventListener("input", () => {
+    output.textContent = slider.value;
+});
+
+// ---------- Initialize ----------
+loadEvents();
+
+
+
 
 

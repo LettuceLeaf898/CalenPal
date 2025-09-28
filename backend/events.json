@@ -64,6 +64,14 @@
     "stress": "1"
   },
   {
+    "date": "2025-10-31",
+    "title": "Halloween Celebration",
+    "description": "Celebrates Halloween",
+    "time": "All day",
+    "importance": "low",
+    "stress": "1"
+  },
+  {
     "date": "2025-11-11",
     "title": "Veterans Day Celebration",
     "description": "Honoring military veterans",
