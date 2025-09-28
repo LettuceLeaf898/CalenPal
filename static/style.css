@@ -16,8 +16,9 @@
       width: 100%;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       padding: 40px 60px 10px 60px;
+      gap: 15px;
     }
 
     .title {
@@ -434,3 +435,15 @@
       border: 2px solid #B8DBD9;
       font-weight: bold;
     }
+
+    .logo {
+        width: 150px;
+        height: auto;
+        /* maintains aspect ratio */
+      }
+
+      .left {
+  display: flex;
+  align-items: center;
+  gap: 15px;                        /* space between text and logo */
+}
