@@ -41,7 +41,9 @@ def agent_response(prompt: str):
             # or generate dynamically  # unique session ID for each request
     new_message = types.Content(
         role="user", parts=[types.Part(text=prompt)]
-    )  # matches your agent input schema
+    )
+
+    response = None  # matches your agent input schema
 
     for event in runner.run(
         user_id=USER_ID,
@@ -53,6 +55,6 @@ def agent_response(prompt: str):
                 response = event.content.parts[0].text
 
     print("==== Session Event Exploration ====")
-
+    print(response)
     return response
 
