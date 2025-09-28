@@ -48,6 +48,9 @@
       <label for="eventDate">Event Date:</label>
       <input type="date" id="eventDate" name="eventDate" required><br><br>
 
+      <label for="eventTitle">Event Time:</label>
+      <input id="appt-time" type="time" name="appt-time" value="13:30"><br><br>
+
       <label for="eventDesc">Event Description:</label>
       <textarea id="eventDesc" name="eventDesc" rows="4" cols="50"></textarea><br><br>
       <div class="slidecontainer">
@@ -112,7 +115,11 @@
 
     <!-- Main White Box -->
     <div class="content-box" id="eventsBox">
+        <div id="eventsBox" class="event-box">
+  <p class="placeholder"> ⬅️Select a date to see events</p>
+  </div>
 
+      
     </div>
   </div>
 

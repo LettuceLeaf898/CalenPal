@@ -139,15 +139,26 @@ function attachDateClick() {
 
             const eventList = events[key] || [];
             const box = document.getElementById("eventsBox");
-
+            
             if (eventList.length === 0) {
-                box.innerHTML = `<h3>${formattedDate}</h3><p>No events for this day.</p>`;
-            } else {
-                const listHTML = eventList
-                    .map(ev => `<li><strong>${ev.title}</strong>: ${ev.description} (Stress: ${ev.stress})</li>`)
-                    .join("");
-                box.innerHTML = `<h3>${formattedDate}</h3><ul>${listHTML}</ul>`;
-            }
+    box.innerHTML = `
+      <div class="event-box">
+        <h1 class="event-title">${formattedDate}</h1>
+        <p>No events for this day.</p>
+      </div>
+    `;
+} else {
+    const listHTML = eventList
+        .map(ev => `<li><strong>${ev.title}</strong>: ${ev.description} (Stress: ${ev.stress})</li>`)
+        .join("");
+    box.innerHTML = `
+      <div class="event-box">
+        <h3 class="event-title">${formattedDate}</h3>
+        <ul class="event-list">${listHTML}</ul>
+      </div>
+    `;
+}
+
         });
     });
 }
@@ -203,4 +214,18 @@ loadEvents();
 
 
 
+const listHTML = eventList
+    .map(ev => {
+        const stressClass = ev.stress > 8 ? "high-stress" : "";
+        return `<li class="${stressClass}">
+                  <strong>${ev.title}</strong>: ${ev.description} (Stress: ${ev.stress})
+                </li>`;
+    })
+    .join("");
 
+box.innerHTML = `
+  <div class="event-box">
+    <h3 class="event-title">${formattedDate}</h3>
+    <ul class="event-list">${listHTML}</ul>
+  </div>
+`;

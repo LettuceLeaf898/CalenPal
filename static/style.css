@@ -212,6 +212,11 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
       font-size: 1.6rem;
     }
+    .calendar .header {
+    padding-bottom: 30px;    /* ⬇️ adjust as needed */
+}
+
+    
 
     .header2 {
       display: flex;
@@ -226,6 +231,7 @@
       font-weight: 600;
       width: 200px;
       color: #00221A;
+      font-size: 1.8rem;
     }
 
     .days {
@@ -546,3 +552,68 @@
       /* dark icon */
       font-size: 1.2rem;
     }
+
+    /* Title style */
+    .event-box .event-title {
+      font-family: 'Poppins', sans-serif;
+      /* or any Google font */
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #2b2b2b;
+      margin-bottom: 16px;
+      /* space between title and list */
+      text-align: center;
+      /* center the date if you like */
+    }
+
+    /* Bullet list style */
+    .event-box .event-list {
+      list-style-type: square;
+      /* options: disc, circle, square, none */
+      padding-left: 24px;
+      /* space so bullets show clearly */
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Individual items */
+    .event-box .event-list li {
+      margin-bottom: 6px;
+      font-size: large;
+    }
+
+  
+
+    /* Overall box spacing */
+.event-box {
+    padding: 15px;           /* space inside the whole box */
+}
+
+/* Space around the date/title */
+.event-title {
+    padding-bottom: 12px;    /* space below the title */
+    margin: 0;               /* reset default margins if needed */
+    font-weight: bold;
+}
+
+/* Space around the list */
+.event-list {
+    padding-left: 25px;      /* indent bullets */
+    padding-top: 8px;        /* space above the list */
+    margin: 0;      
+           /* remove default margin for consistency */
+}
+
+
+.placeholder {
+    color: rgba(0, 0, 0, 0.4);  /* semi-transparent text */
+    text-align: center;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    padding: 20px;
+    font-size: 3rem;
+}
