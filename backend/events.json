@@ -1,110 +1,90 @@
 [
   {
-    "title": "New Year's Day Party",
-    "date": { "month": 1, "day": 1 },
-    "time": "All day",
+    "date": "2025-01-01",
+    "title": "New Year's Day Celebration",
     "description": "First day of the year",
+    "time": "00:00",
     "importance": "medium",
-    "stress_level": 1,
-    "recurrence": "annual"
+    "stress": "1"
   },
   {
-    "title": "Birthday of Martin Luther King, Jr. Party",
-    "date": { "month": 1, "weekday": 1, "nth": 3 },
-    "time": "All day",
+    "date": "2025-01-20",
+    "title": "Birthday of Martin Luther King, Jr. Celebration",
     "description": "Honoring Martin Luther King, Jr.",
+    "time": "All day",
     "importance": "low",
-    "stress_level": 1,
-    "recurrence": "annual"
+    "stress": "1"
   },
   {
-    "title": "Inauguration Day Party",
-    "date": { "month": 1, "day": 20 },
-    "time": "All day",
-    "description": "Presidential inauguration every 4 years",
-    "importance": "low",
-    "stress_level": 1,
-    "recurrence": "every_4_years"
-  },
-  {
-    "title": "Washington's Birthday Party",
-    "date": { "month": 2, "weekday": 1, "nth": 3 },
-    "time": "All day",
+    "date": "2025-02-17",
+    "title": "Washington's Birthday Celebration",
     "description": "Also known as Presidents Day",
+    "time": "All day",
     "importance": "low",
-    "stress_level": 1,
-    "recurrence": "annual"
+    "stress": "1"
   },
   {
-    "title": "Memorial Day Party",
-    "date": { "month": 5, "weekday": 1, "nth": -1 },
-    "time": "All day",
+    "date": "2025-05-26",
+    "title": "Memorial Day Celebration",
     "description": "Honoring military personnel who died in service",
+    "time": "All day",
     "importance": "low",
-    "stress_level": 1,
-    "recurrence": "annual"
+    "stress": "1"
   },
   {
-    "title": "Juneteenth National Independence Day Party",
-    "date": { "month": 6, "day": 19 },
-    "time": "All day",
+    "date": "2025-06-19",
+    "title": "Juneteenth National Independence Day Celebration",
     "description": "Celebration of the end of slavery",
+    "time": "All day",
     "importance": "low",
-    "stress_level": 1,
-    "recurrence": "annual"
+    "stress": "1"
   },
   {
-    "title": "Independence Day Party",
-    "date": { "month": 7, "day": 4 },
-    "time": "All day",
+    "date": "2025-07-04",
+    "title": "Independence Day Celebration",
     "description": "Celebrates US independence",
+    "time": "All day",
     "importance": "medium",
-    "stress_level": 1,
-    "recurrence": "annual"
+    "stress": "1"
   },
   {
-    "title": "Labor Day Party",
-    "date": { "month": 9, "weekday": 1, "nth": 1 },
-    "time": "All day",
+    "date": "2025-09-01",
+    "title": "Labor Day Celebration",
     "description": "Honoring workers and labor movement",
+    "time": "All day",
     "importance": "low",
-    "stress_level": 1,
-    "recurrence": "annual"
+    "stress": "1"
   },
   {
-    "title": "Columbus Day Party",
-    "date": { "month": 10, "weekday": 1, "nth": 2 },
-    "time": "All day",
+    "date": "2025-10-13",
+    "title": "Columbus Day Celebration",
     "description": "Commemorates Christopher Columbus's landing",
-    "importance": "low", 
-    "stress_level": 1,
-    "recurrence": "annual"
-  },
-  {
-    "title": "Veterans Day Party",
-    "date": { "month": 11, "day": 11 },
     "time": "All day",
-    "description": "Honoring military veterans",
     "importance": "low",
-    "stress_level": 1,
-    "recurrence": "annual"
+    "stress": "1"
   },
   {
-    "title": "Thanksgiving Day Party",
-    "date": { "month": 11, "weekday": 4, "nth": 4 },
+    "date": "2025-11-11",
+    "title": "Veterans Day Celebration",
+    "description": "Honoring military veterans",
     "time": "All day",
+    "importance": "low",
+    "stress": "1"
+  },
+  {
+    "date": "2025-11-27",
+    "title": "Thanksgiving Day Celebration",
     "description": "Day of giving thanks",
+    "time": "All day",
     "importance": "high",
-    "stress_level": 1,
-    "recurrence": "annual"
+    "stress": "1"
   },
   {
-    "title": "Christmas Day Party",
-    "date": { "month": 12, "day": 25 },
-    "time": "All day",
+    "date": "2025-12-25",
+    "title": "Christmas Day Celebration",
     "description": "Celebration of Christmas",
+    "time": "All day",
     "importance": "high",
-    "stress_level": 1,
-    "recurrence": "annual"
+    "stress": "1"
   }
 ]
