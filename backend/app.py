@@ -10,6 +10,8 @@ from werkzeug.utils import secure_filename
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 from ClientRunner import agent_response
 from PDFrunner import agent_rep
+from pdfExtractor import extract_pdf_text
+from pdfExtractor import merge_json_data, pre_parse_pdf_text
 
 app = Flask(__name__, template_folder="../framework", static_folder="../static")
 CORS(app)
@@ -103,26 +105,35 @@ def ask_agent():
 
 @app.route("/upload-syllabus", methods=["POST"])
 def upload_syllabus():
-    """Upload syllabus PDF and save to uploads folder (AI processing later)."""
-    if "file" not in request.files:
-        return jsonify({"error": "No file part in request"}), 400
+    if 'file' not in request.files:
+        return jsonify({"error": "No file part"}), 400
 
-    file = request.files["file"]
-    if not file or file.filename == "":
+    file = request.files['file']
+    if not file or file.filename == '':
         return jsonify({"error": "No selected file"}), 400
 
-    try:
-        filename = secure_filename(file.filename)
-        uploads_dir = os.path.join(os.path.dirname(__file__), "..", "uploads")
-        os.makedirs(uploads_dir, exist_ok=True)
-        save_path = os.path.join(uploads_dir, filename)
-        print("Saving file to:", save_path)
-        file.save(save_path)
-        response = agent_rep(save_path)
-        print(response)
-        return ">> SYLLABUS PROCESSED SUCCESSFULLY <<"
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    filename = secure_filename(file.filename)
+    uploads_dir = os.path.join(os.path.dirname(__file__), 'uploads')
+    os.makedirs(uploads_dir, exist_ok=True)
+    save_path = os.path.join(uploads_dir, filename)
+    file.save(save_path)
+
+    # Extract text first
+    pdf_text = extract_pdf_text(save_path)
+
+    # Optional: Pre-parse PDF text to simplify agent's task
+    pdf_text = json.dumps(pre_parse_pdf_text(pdf_text))
+
+    # Send text to PDF agent
+    response_json = agent_rep(pdf_text)
+
+    # Merge JSON into events.json
+    merged_events = merge_json_data(response_json)
+
+    # Delete uploaded file
+    os.remove(save_path)
+
+    return jsonify({"events": json.loads(merged_events)}), 201
 
 
 # -------------------------------
